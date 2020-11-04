@@ -358,7 +358,9 @@ extension DelegateProxyType where ParentObject: HasPrefetchDataSource, Self.Dele
                     
                 return Disposables.create { [weak object] in
                     subscription.dispose()
-                    object?.layoutIfNeeded()
+                    if object?.window != nil {
+                        object?.layoutIfNeeded()
+                    }
                     unregisterDelegate.dispose()
                 }
             }
